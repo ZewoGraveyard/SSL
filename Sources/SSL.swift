@@ -29,5 +29,5 @@ public protocol SSLContextType {
 }
 
 public protocol SSLStreamType: StreamType {
-    init(context: SSLContextType, rawStream: StreamType)
+    init(context: SSLContextType, rawStream: StreamType) throws
 }
