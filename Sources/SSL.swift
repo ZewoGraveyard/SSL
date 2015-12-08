@@ -24,10 +24,27 @@
 
 import Stream
 
-public protocol SSLContextType {
-
+public protocol SSLType {
+	
 }
 
-public protocol SSLStreamType: StreamType {
-    init(context: SSLContextType, rawStream: StreamType) throws
+public protocol SSLContextType {
+	
+}
+
+public protocol SSLClientContextType: SSLContextType {
+    var streamType: SSLClientStreamType.Type { get }
+}
+
+public protocol SSLServerContextType: SSLContextType {
+    var streamType: SSLServerStreamType.Type { get }
+    init(certificate: String, privateKey: String, certificateChain: String?) throws
+}
+
+public protocol SSLClientStreamType: StreamType {
+    init(context: SSLClientContextType, rawStream: StreamType) throws
+}
+
+public protocol SSLServerStreamType: StreamType {
+    init(context: SSLServerContextType, rawStream: StreamType) throws
 }
